@@ -1,5 +1,6 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,10 +15,17 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "tb_payment")
 public class Payment implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private Date moment;
+
+    @OneToOne(mappedBy = "payment")
+    private Order order;
 
     @Override
     public boolean equals(Object o) {

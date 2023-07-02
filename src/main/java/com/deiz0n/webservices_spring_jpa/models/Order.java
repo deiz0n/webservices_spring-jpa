@@ -27,6 +27,9 @@ public class Order implements Serializable {
     @ManyToOne
     private User user;
 
+    @OneToOne
+    private Payment payment;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
