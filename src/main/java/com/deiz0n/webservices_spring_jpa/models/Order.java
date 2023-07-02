@@ -1,25 +1,31 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
 import com.deiz0n.webservices_spring_jpa.models.enums.OrderStatus;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity
+@Table(name = "tb_order")
 public class Order implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private Date moment;
     private OrderStatus orderStatus;
+
+    @ManyToOne
+    private User user;
 
     @Override
     public boolean equals(Object o) {
