@@ -24,7 +24,8 @@ public class Payment implements Serializable {
     private UUID id;
     private Date moment;
 
-    @OneToOne(mappedBy = "payment")
+    @OneToOne
+    @MapsId
     private Order order;
 
     @Override

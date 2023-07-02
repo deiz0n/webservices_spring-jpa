@@ -27,7 +27,7 @@ public class Order implements Serializable {
     @ManyToOne
     private User user;
 
-    @OneToOne
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
     @Override
