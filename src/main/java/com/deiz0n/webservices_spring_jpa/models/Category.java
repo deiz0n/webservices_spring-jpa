@@ -1,10 +1,7 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -25,6 +22,7 @@ public class Category implements Serializable {
     private UUID id;
     private String name;
 
+    @Setter(AccessLevel.NONE)
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
 
