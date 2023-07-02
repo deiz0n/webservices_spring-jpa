@@ -1,5 +1,6 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,8 @@ import java.util.UUID;
 public class Product  implements Serializable {
 
     private UUID id;
+
+    @Column(unique = true)
     private String name;
     private String description;
     private Double price;
