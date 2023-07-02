@@ -1,10 +1,7 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -30,9 +27,14 @@ public class Product  implements Serializable {
     private Double price;
     private String imgURL;
 
+    @Setter(AccessLevel.NONE)
     @ManyToMany
     @JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> items = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

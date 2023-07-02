@@ -2,10 +2,7 @@ package com.deiz0n.webservices_spring_jpa.models;
 
 import com.deiz0n.webservices_spring_jpa.models.enums.OrderStatus;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.io.Serializable;
 import java.util.*;
@@ -26,6 +23,10 @@ public class Order implements Serializable {
 
     @ManyToOne
     private User user;
+
+    @Setter(AccessLevel.NONE)
+    @OneToMany(mappedBy = "id.order")
+    private Set<OrderItem> items = new HashSet<>();
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
