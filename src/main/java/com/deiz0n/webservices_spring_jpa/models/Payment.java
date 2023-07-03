@@ -28,6 +28,11 @@ public class Payment implements Serializable {
     @MapsId
     private Order order;
 
+    public Payment(Date moment, Order order) {
+        this.moment = moment;
+        this.order = order;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

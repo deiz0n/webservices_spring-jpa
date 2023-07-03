@@ -14,7 +14,6 @@ import java.util.Objects;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order_item")
@@ -25,6 +24,13 @@ public class OrderItem implements Serializable {
 
     private Integer quantity;
     private Double price;
+
+    public OrderItem(Order order, Product product, Integer quantity, Double price) {
+        id.setOrder(order);
+        id.setProduct(product);
+        this.quantity = quantity;
+        this.price = price;
+    }
 
     public Double subTotal() {
         return getPrice() * getQuantity();

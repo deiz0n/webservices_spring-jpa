@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_product")
@@ -35,6 +34,13 @@ public class Product  implements Serializable {
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
+
+    public Product(UUID id, String name, String description, Double price, String imgURL) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgURL = imgURL;
+    }
 
     @Override
     public boolean equals(Object o) {

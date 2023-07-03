@@ -31,6 +31,14 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Order> orders = new ArrayList<>();
 
+    public User(UUID id, String name, String email, String address, String phone, String password) {
+        this.name = name;
+        this.email = email;
+        this.address = address;
+        this.phone = phone;
+        this.password = password;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

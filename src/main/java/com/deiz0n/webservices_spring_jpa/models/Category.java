@@ -11,7 +11,6 @@ import java.util.UUID;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_category")
@@ -25,6 +24,10 @@ public class Category implements Serializable {
     @Setter(AccessLevel.NONE)
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();
+
+    public Category(String name) {
+        this.name = name;
+    }
 
     @Override
     public boolean equals(Object o) {

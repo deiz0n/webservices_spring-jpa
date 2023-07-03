@@ -31,6 +31,30 @@ public class Order implements Serializable {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
+    public Order(Date moment, OrderStatus orderStatus, User user) {
+        this.moment = moment;
+        this.user = user;
+        setOrderStatus(orderStatus);
+    }
+
+    public OrderStatus getOrderStatus() {
+        return OrderStatus.valueOf(String.valueOf(orderStatus));
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        if (orderStatus != null) {
+            this.orderStatus = OrderStatus.valueOf(orderStatus.getCode());
+        }
+    }
+
+    public Double getTotalValue() {
+        double sum = 0.0;
+        for (OrderItem value : items) {
+            sum += value.subTotal();
+        }
+        return sum;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
