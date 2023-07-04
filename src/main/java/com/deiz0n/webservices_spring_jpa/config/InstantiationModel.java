@@ -14,8 +14,9 @@ import java.util.Arrays;
 import java.util.Date;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class InstantiationModel implements CommandLineRunner {
+
 
     private CategoryRepository categoryRepository;
     private OrderRepository orderRepository;
@@ -32,8 +33,11 @@ public class InstantiationModel implements CommandLineRunner {
         this.orderItemRepository = orderItemRepository;
     }
 
+
     @Override
     public void run(String... args) throws Exception {
+
+        /*
 
         var c1 = new Category("Electronics");
         var c2 = new Category("Books");
@@ -72,7 +76,14 @@ public class InstantiationModel implements CommandLineRunner {
         orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3));
 
         var pay1 = new Payment(Instant.parse("2015-12-23T19:53:07Z"), o2);
+        var pay2 = new Payment(Instant.now(), o1);
+        var pay3 = new Payment(Instant.parse("2013-01-18T00:53:07Z"), o3);
 
+        o1.setPayment(pay2);
         o2.setPayment(pay1);
+        o3.setPayment(pay3);
+
+     */
+
     }
 }
