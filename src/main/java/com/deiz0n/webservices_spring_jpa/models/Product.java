@@ -35,7 +35,7 @@ public class Product  implements Serializable {
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> items = new HashSet<>();
 
-    public Product(UUID id, String name, String description, Double price, String imgURL) {
+    public Product(String name, String description, Double price, String imgURL) {
         this.name = name;
         this.description = description;
         this.price = price;

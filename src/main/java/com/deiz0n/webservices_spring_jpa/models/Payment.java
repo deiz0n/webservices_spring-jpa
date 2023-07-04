@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
@@ -22,13 +23,13 @@ public class Payment implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private Date moment;
+    private Instant moment;
 
     @OneToOne
     @MapsId
     private Order order;
 
-    public Payment(Date moment, Order order) {
+    public Payment(Instant moment, Order order) {
         this.moment = moment;
         this.order = order;
     }

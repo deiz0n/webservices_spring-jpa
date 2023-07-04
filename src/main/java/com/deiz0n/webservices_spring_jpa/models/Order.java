@@ -5,11 +5,11 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;
+import java.time.Instant;
 import java.util.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order")
@@ -18,7 +18,7 @@ public class Order implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    private Date moment;
+    private Instant moment;
     private OrderStatus orderStatus;
 
     @ManyToOne
@@ -31,7 +31,7 @@ public class Order implements Serializable {
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
     private Payment payment;
 
-    public Order(Date moment, OrderStatus orderStatus, User user) {
+    public Order(Instant moment, OrderStatus orderStatus, User user) {
         this.moment = moment;
         this.user = user;
         setOrderStatus(orderStatus);
