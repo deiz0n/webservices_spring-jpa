@@ -1,5 +1,6 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,6 +22,7 @@ public class Category implements Serializable {
     private UUID id;
     private String name;
 
+    @JsonIgnore
     @Setter(AccessLevel.NONE)
     @ManyToMany(mappedBy = "categories")
     private Set<Product> products = new HashSet<>();

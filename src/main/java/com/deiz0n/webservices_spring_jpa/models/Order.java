@@ -1,8 +1,10 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
 import com.deiz0n.webservices_spring_jpa.models.enums.OrderStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 
 import java.io.Serializable;
 import java.time.Instant;
@@ -24,6 +26,7 @@ public class Order implements Serializable {
     @ManyToOne
     private User user;
 
+    @JsonIgnore
     @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();

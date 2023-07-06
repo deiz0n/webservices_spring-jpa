@@ -1,5 +1,6 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -40,6 +41,15 @@ public class Product  implements Serializable {
         this.description = description;
         this.price = price;
         this.imgURL = imgURL;
+    }
+
+    @JsonIgnore
+    public Set<Order> getOrders() {
+        Set<Order> orders = new HashSet<>();
+        for (OrderItem i : items) {
+            orders.add(i.getOrder());
+        }
+        return orders;
     }
 
     @Override
