@@ -26,7 +26,7 @@ public class UserController {
     @Transactional(readOnly = true)
     @GetMapping
     public ResponseEntity<List<User>> findAllUsers() {
-        var users = userService.getUsers();
+        List<User> users = userService.getUsers();
         return ResponseEntity.ok(users);
     }
 

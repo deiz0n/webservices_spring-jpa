@@ -25,13 +25,15 @@ public class ProductController {
     @Transactional(readOnly = true)
     @GetMapping
     public ResponseEntity<List<Product>> findAllProducts() {
-        return ResponseEntity.ok().body(productService.getProducts());
+        List<Product> products = productService.getProducts();
+        return ResponseEntity.ok().body(products);
     }
 
     @Transactional(readOnly = true)
     @GetMapping(value = ("/{id}"))
     public ResponseEntity<Product> findProductById(@PathVariable UUID id) {
-        return ResponseEntity.ok().body(productService.getProduct(id));
+        var product = productService.getProduct(id);
+        return ResponseEntity.ok().body(product);
     }
 
     @PostMapping
