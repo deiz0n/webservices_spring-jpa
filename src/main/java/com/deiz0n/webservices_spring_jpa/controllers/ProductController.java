@@ -50,8 +50,8 @@ public class ProductController {
 
     @PutMapping(value = "/{id}")
     public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product product, ProductDTO productDTO) {
-        product = productService.updateProduct(id, product);
-        BeanUtils.copyProperties(productDTO, product);
-        return ResponseEntity.ok().body(product);
+         product = productService.updateProduct(id, product);
+         BeanUtils.copyProperties(product, productDTO);
+         return ResponseEntity.ok().body(product);
     }
 }

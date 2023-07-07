@@ -43,22 +43,20 @@ public class ProductService {
         }
     }
 
-    public Product updateProduct(UUID id, Product oldProductData) {
+    public Product updateProduct(UUID id, Product newProductData) {
         try{
-            var newProductData = productRepository.getReferenceById(id);
-            updateProductData(newProductData, oldProductData);
+            var oldProductData = productRepository.getReferenceById(id);
+            updateProductData(oldProductData, newProductData);
             return productRepository.save(newProductData);
         } catch (EntityNotFoundException error) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    public void updateProductData(Product newProductData, Product oldProductData) {
-        newProductData.setName(oldProductData.getName());
-        newProductData.setDescription(oldProductData.getDescription());
-        newProductData.setPrice(oldProductData.getPrice());
-        newProductData.setImgURL(oldProductData.getImgURL());
+    public void updateProductData(Product oldProductData, Product newProductData) {
+        oldProductData.setName(newProductData.getName());
+        oldProductData.setDescription(newProductData.getDescription());
+        oldProductData.setPrice(newProductData.getPrice());
+        oldProductData.setImgURL(newProductData.getImgURL());
     }
-
-
 }

@@ -43,22 +43,21 @@ public class UserService {
         }
     }
 
-    public User updateUser(UUID id, User oldUserData) {
+    public User updateUser(UUID id, User newUserData) {
         try {
-            var newUserData = userRepository.getReferenceById(id);
-            updateDataUser(newUserData, oldUserData);
+            var oldUserData = userRepository.getReferenceById(id);
+            updateDataUser(oldUserData, newUserData);
             return userRepository.save(newUserData);
         } catch (EntityNotFoundException error) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    public void updateDataUser(User newUserData, User oldUserData) {
-        newUserData.setName(oldUserData.getName());
-        newUserData.setEmail(oldUserData.getEmail());
-        newUserData.setAddress(oldUserData.getAddress());
-        newUserData.setPhone(oldUserData.getPhone());
-        newUserData.setPassword(oldUserData.getPassword());
+    public void updateDataUser(User oldUserData, User newUserData) {
+        oldUserData.setName(newUserData.getName());
+        oldUserData.setEmail(newUserData.getEmail());
+        oldUserData.setAddress(newUserData.getAddress());
+        oldUserData.setPhone(newUserData.getPhone());
+        oldUserData.setPassword(newUserData.getPassword());
     }
-
 }
