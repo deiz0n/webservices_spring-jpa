@@ -16,7 +16,7 @@ import java.util.*;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private UUID id;
     private String name;
     private String email;

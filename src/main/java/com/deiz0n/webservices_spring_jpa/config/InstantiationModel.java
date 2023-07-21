@@ -37,7 +37,7 @@ public class InstantiationModel implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
+        /*
 
         var c1 = new Category("Electronics");
         var c2 = new Category("Books");
@@ -83,7 +83,6 @@ public class InstantiationModel implements CommandLineRunner {
         o2.setPayment(pay1);
         o3.setPayment(pay3);
 
-
-
+    */
     }
 }

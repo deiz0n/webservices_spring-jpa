@@ -14,7 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional
 @RestController
 @RequestMapping( value = "/products")
 public class ProductController {
@@ -22,20 +21,20 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @Transactional(readOnly = true)
     @GetMapping
     public ResponseEntity<List<Product>> findAllProducts() {
         List<Product> products = productService.getProducts();
         return ResponseEntity.ok().body(products);
     }
 
-    @Transactional(readOnly = true)
+
     @GetMapping(value = ("/{id}"))
     public ResponseEntity<Product> findProductById(@PathVariable UUID id) {
         var product = productService.getProduct(id);
         return ResponseEntity.ok().body(product);
     }
 
+    @Transactional
     @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody @Valid ProductDTO productDTO) {
         var product = new Product();
@@ -44,12 +43,14 @@ public class ProductController {
         return ResponseEntity.created(uri).body(productService.insertProduct(product));
     }
 
+    @Transactional
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> remProduct(@PathVariable UUID id) {
         productService.deleteProductById(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Transactional
     @PutMapping(value = "/{id}")
     public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product product, ProductDTO productDTO) {
          product = productService.updateProduct(id, product);

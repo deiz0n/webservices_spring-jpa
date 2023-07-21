@@ -18,9 +18,8 @@ import java.util.UUID;
 public class Product  implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private UUID id;
-
     private String name;
     private String description;
     private Double price;

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional(readOnly = true)
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {

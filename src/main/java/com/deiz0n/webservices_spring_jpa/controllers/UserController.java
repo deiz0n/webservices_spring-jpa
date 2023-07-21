@@ -15,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
@@ -23,20 +22,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Transactional(readOnly = true)
     @GetMapping
     public ResponseEntity<List<User>> findAllUsers() {
         List<User> users = userService.getUsers();
         return ResponseEntity.ok(users);
     }
 
-    @Transactional(readOnly = true)
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> findUserById(@PathVariable UUID id) {
         var user = userService.getUser(id);
         return ResponseEntity.ok().body(user);
     }
 
+    @Transactional
     @PostMapping
     public ResponseEntity<User> addUser(@RequestBody @Valid UserDTO userDTO) {
         var user = new User();
@@ -45,12 +43,14 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.addUser(user));
     }
 
+    @Transactional
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> remUser(@PathVariable UUID id) {
         userService.remUser(id);
         return ResponseEntity.noContent().build();
     }
 
+    @Transactional
     @PutMapping(value = "/{id}")
     public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody @Valid User user, UserDTO userDTO) {
         user = userService.updateUser(id, user);

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-@Transactional(readOnly = true)
 @RestController
 @RequestMapping(value = "/orders")
 public class OrderController {
