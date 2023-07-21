@@ -12,19 +12,29 @@ class OrderItemTest {
 
     @Test
     void testSubTotal() {
-        var orderItem = new OrderItem(new Order(), new Product() , 2, 1599.34);
-        assertEquals(3198.68, orderItem.subTotal());
+        var product = new Product();
+        product.setPrice(198.23);
+        var orderItem = new OrderItem(new Order(), product, 2);
+        assertEquals(396.46, orderItem.subTotal(product));
+        assertNotEquals(396, orderItem.subTotal(product));
     }
 
     @Test
     void testSubTotal2() {
-        var orderItem = new OrderItem(new Order(), new Product() , 46, 193.26);
-        assertEquals(8889.96, orderItem.subTotal());
+        var product = new Product();
+        product.setPrice(77.25);
+        var orderItem = new OrderItem(new Order(), product, 33);
+        assertEquals(2549.25, orderItem.subTotal(product));
+        assertFalse(orderItem.subTotal(product) == 2549);
     }
 
     @Test
     void testSubTotal3() {
-        var orderItem = new OrderItem(new Order(), new Product() , 8, 19.26);
-        assertNotEquals(154, orderItem.subTotal());
+        var product = new Product();
+        product.setPrice(95.19);
+        var orderItem = new OrderItem(new Order(), product, 25);
+        assertTrue(orderItem.subTotal(product) == 2379.75);
+        assertFalse(orderItem.subTotal(product) == 2379.7);
     }
+
 }

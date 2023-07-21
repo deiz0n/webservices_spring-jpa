@@ -10,13 +10,14 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_product")
 public class Product  implements Serializable {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue
     private UUID id;
@@ -49,18 +50,5 @@ public class Product  implements Serializable {
             orders.add(i.getOrder());
         }
         return orders;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return Objects.equals(id, product.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
