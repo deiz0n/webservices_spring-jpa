@@ -9,7 +9,7 @@ public record UserDTO(
         @NotBlank String name,
         @NotBlank @Email String email,
         @NotBlank @Size(max = 100) String address,
-        @NotBlank @Size(min = 13)  String phone,
+        @NotBlank @Size(min = 9)  String phone,
         @NotNull String password
 ) {
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,33 +23,19 @@ public class OrderItem implements Serializable {
     private OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
-    private Double price;
 
-    public OrderItem(Order order, Product product, Integer quantity, Double price) {
+    public OrderItem(Order order, Product product, Integer quantity){
         id.setOrder(order);
         id.setProduct(product);
         this.quantity = quantity;
-        this.price = price;
     }
     @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
 
-    public void setOrder(Order order) {
-        id.setOrder(order);
-    }
-
-    public Product getProduct() {
-        return id.getProduct();
-    }
-
-    public void setProduct(Product product) {
-        id.setProduct(product);
-    }
-
-    public Double subTotal() {
-        return getPrice() * getQuantity();
+    public Double subTotal(Product product) {
+        return product.getPrice() * getQuantity();
     }
 
     @Override
