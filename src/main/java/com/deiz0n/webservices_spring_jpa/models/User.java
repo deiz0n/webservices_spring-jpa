@@ -7,14 +7,14 @@ import lombok.*;
 import java.io.Serializable;
 import java.util.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue
     private UUID id;
@@ -35,18 +35,5 @@ public class User implements Serializable {
         this.address = address;
         this.phone = phone;
         this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

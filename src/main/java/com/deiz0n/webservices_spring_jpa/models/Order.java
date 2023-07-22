@@ -10,13 +10,14 @@ import java.io.Serializable;
 import java.time.Instant;
 import java.util.*;
 
-@Getter
-@Setter
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order")
 public class Order implements Serializable {
 
+    @EqualsAndHashCode.Include
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -27,7 +28,7 @@ public class Order implements Serializable {
     private User user;
 
     @JsonIgnore
-    @Setter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
 
@@ -56,18 +57,5 @@ public class Order implements Serializable {
             sum += value.subTotal();
         }
         return sum;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Order order = (Order) o;
-        return Objects.equals(id, order.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }

@@ -83,6 +83,7 @@ public class InstantiationModel implements CommandLineRunner {
         o2.setPayment(pay1);
         o3.setPayment(pay3);
 
+
     */
     }
 }
