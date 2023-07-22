@@ -21,21 +21,28 @@ public class OrderItem implements Serializable {
     private OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
-    private Double price;
 
+<<<<<<< HEAD
     public OrderItem(Order order, Product product, Integer quantity, Double price){
+=======
+    public OrderItem(Order order, Product product, Integer quantity){
+>>>>>>> eb1b5756383a7798312730358742814fcd963c80
         id.setOrder(order);
         id.setProduct(product);
         this.quantity = quantity;
-        this.price = price;
     }
     @JsonIgnore
     public Order getOrder() {
         return id.getOrder();
     }
 
+<<<<<<< HEAD
     public Double subTotal() {
         return getPrice() * getQuantity();
+=======
+    public Double subTotal(Product product) {
+        return product.getPrice() * getQuantity();
+>>>>>>> eb1b5756383a7798312730358742814fcd963c80
     }
 
 }

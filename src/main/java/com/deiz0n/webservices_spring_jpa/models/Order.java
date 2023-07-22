@@ -51,6 +51,7 @@ public class Order implements Serializable {
         }
     }
 
+    /*
     public Double getTotalValue() {
         double sum = 0.0;
         for (OrderItem value : items) {
@@ -58,4 +59,9 @@ public class Order implements Serializable {
         }
         return sum;
     }
+<<<<<<< HEAD
+=======
+     */
+
+>>>>>>> eb1b5756383a7798312730358742814fcd963c80
 }
