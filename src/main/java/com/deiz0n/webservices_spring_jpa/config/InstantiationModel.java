@@ -59,11 +59,16 @@ public class InstantiationModel implements CommandLineRunner {
 
         productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
 
-        var u1 = new User("User 1", "user1@example.com", "Rua das Flores, 123", "(11)98765-4321", "senha123");
-        var u2 = new User("User 2", "user2@example.com", "Avenida dos Sonhos, 456", "(22)99888-7766", "senha456");
-        var u3 = new User("User 3", "user3@example.com", "Praça das Estrelas, 789", "(33)97777-5555", "senha789");
-        var u4 = new User("User 4", "user4@example.com", "Avenida das Maravilhas, 1010", "(44)96666-4444", "senha1010");
-        var u5 = new User("User 5", "user5@example.com", "Rua dos Milagres, 222", "(55)95555-3333", "senha222");
+        var u1 = new User("User 1", "user1@example.com", "Rua das Flores, 123", "(11)98765-4321", null);
+        u1.setPassword("senha123");
+        var u2 = new User("User 2", "user2@example.com", "Avenida dos Sonhos, 456", "(22)99888-7766", null);
+        u2.setPassword("senha456");
+        var u3 = new User("User 3", "user3@example.com", "Praça das Estrelas, 789", "(33)97777-5555", null);
+        u3.setPassword("senha789");
+        var u4 = new User("User 4", "user4@example.com", "Avenida das Maravilhas, 1010", "(44)96666-4444", null);
+        u4.setPassword("senha1010");
+        var u5 = new User("User 5", "user5@example.com", "Rua dos Milagres, 222", "(55)95555-3333", null);
+        u5.setPassword("senha222");
 
         userRepository.saveAll(Arrays.asList(u1, u2, u3, u4, u5));
 

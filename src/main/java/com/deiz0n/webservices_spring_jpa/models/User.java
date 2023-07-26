@@ -3,6 +3,7 @@ package com.deiz0n.webservices_spring_jpa.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.Serializable;
 import java.util.*;
@@ -13,6 +14,8 @@ import java.util.*;
 @Entity
 @Table(name = "tb_user")
 public class User implements Serializable {
+
+    private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     @EqualsAndHashCode.Include
     @Id
@@ -36,4 +39,9 @@ public class User implements Serializable {
         this.phone = phone;
         this.password = password;
     }
+
+    public void setPassword(String password) {
+        this.password = passwordEncoder.encode(password);
+    }
+
 }

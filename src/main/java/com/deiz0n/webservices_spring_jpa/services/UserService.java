@@ -30,6 +30,7 @@ public class UserService {
     }
 
     public User addUser(User user) {
+        user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 
