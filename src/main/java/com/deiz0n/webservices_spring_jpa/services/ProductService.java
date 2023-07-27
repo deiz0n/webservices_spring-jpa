@@ -15,25 +15,33 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class ProductService {
+public class ProductService implements ServiceCRUD<Product> {
 
-    @Autowired
     private ProductRepository productRepository;
 
-    public List<Product> getProducts() {
+    @Autowired
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
+    @Override
+    public List<Product> getAllResourcers() {
         return productRepository.findAll();
     }
 
-    public Product getProduct(UUID id) {
+    @Override
+    public Product getResource(UUID id) {
         Optional<Product> product = productRepository.findById(id);
         return product.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public Product insertProduct(Product product) {
+    @Override
+    public Product createResource(Product product) {
         return productRepository.save(product);
     }
 
-    public void deleteProductById(UUID id) {
+    @Override
+    public void removeResource(UUID id) {
         try {
             productRepository.deleteById(id);
         } catch (EmptyResultDataAccessException error) {
@@ -43,20 +51,22 @@ public class ProductService {
         }
     }
 
-    public Product updateProduct(UUID id, Product newProductData) {
+    @Override
+    public Product updateResource(UUID id, Product newResourceData) {
         try{
             var oldProductData = productRepository.getReferenceById(id);
-            updateProductData(oldProductData, newProductData);
-            return productRepository.save(newProductData);
+            updateDataResource(oldProductData, newResourceData);
+            return productRepository.save(newResourceData);
         } catch (EntityNotFoundException error) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    public void updateProductData(Product oldProductData, Product newProductData) {
-        oldProductData.setName(newProductData.getName());
-        oldProductData.setDescription(newProductData.getDescription());
-        oldProductData.setPrice(newProductData.getPrice());
-        oldProductData.setImgURL(newProductData.getImgURL());
+    @Override
+    public void updateDataResource(Product oldResourceData, Product newResourceData) {
+        oldResourceData.setName(newResourceData.getName());
+        oldResourceData.setDescription(newResourceData.getDescription());
+        oldResourceData.setPrice(newResourceData.getPrice());
+        oldResourceData.setImgURL(newResourceData.getImgURL());
     }
 }

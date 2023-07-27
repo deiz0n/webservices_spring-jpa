@@ -15,26 +15,34 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class UserService {
+public class UserService implements ServiceCRUD<User> {
 
-    @Autowired
     private UserRepository userRepository;
 
-    public List<User> getUsers() {
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    @Override
+    public List<User> getAllResourcers() {
         return userRepository.findAll();
     }
 
-    public User getUser(UUID id) {
+    @Override
+    public User getResource(UUID id) {
         Optional<User> user = userRepository.findById(id);
         return user.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
-    public User addUser(User user) {
+    @Override
+    public User createResource(User user) {
         user.setPassword(user.getPassword());
         return userRepository.save(user);
     }
 
-    public void remUser(UUID id) {
+    @Override
+    public void removeResource(UUID id) {
         try {
             userRepository.deleteById(id);
         } catch (EmptyResultDataAccessException error) {
@@ -44,22 +52,23 @@ public class UserService {
         }
     }
 
-    public User updateUser(UUID id, User newUserData) {
+    @Override
+    public User updateResource(UUID id, User newResourceData) {
         try {
             var oldUserData = userRepository.getReferenceById(id);
-            updateDataUser(oldUserData, newUserData);
-            return userRepository.save(newUserData);
+            updateDataResource(oldUserData, newResourceData);
+            return userRepository.save(newResourceData);
         } catch (EntityNotFoundException error) {
             throw new ResourceNotFoundException(id);
         }
     }
 
-    public void updateDataUser(User oldUserData, User newUserData) {
-        oldUserData.setName(newUserData.getName());
-        oldUserData.setEmail(newUserData.getEmail());
-        oldUserData.setAddress(newUserData.getAddress());
-        oldUserData.setPhone(newUserData.getPhone());
-        oldUserData.setPassword(newUserData.getPassword());
+    @Override
+    public void updateDataResource(User oldResourceData, User newResourceData) {
+        oldResourceData.setName(newResourceData.getName());
+        oldResourceData.setEmail(newResourceData.getEmail());
+        oldResourceData.setAddress(newResourceData.getAddress());
+        oldResourceData.setPhone(newResourceData.getPhone());
+        oldResourceData.setPassword(newResourceData.getPassword());
     }
-
 }
