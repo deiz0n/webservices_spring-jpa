@@ -11,18 +11,23 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class OrderService {
+public class OrderService implements ServiceReader<Order> {
 
-    @Autowired
     private OrderRepository orderRepository;
 
-    public List<Order> getOrders() {
+    @Autowired
+    public OrderService(OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
+
+    @Override
+    public List<Order> getAllResources() {
         return orderRepository.findAll();
     }
 
-    public Order getOrder(UUID id) {
+    @Override
+    public Order getResource(UUID id) {
         Optional<Order> order = orderRepository.findById(id);
         return order.orElseThrow(() -> new ResourceNotFoundException(id));
     }
-
 }

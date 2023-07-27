@@ -11,16 +11,22 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class CategoryService {
+public class CategoryService implements ServiceReader<Category> {
 
-    @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Category> getCategories() {
+    @Autowired
+    public CategoryService(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
+
+    @Override
+    public List<Category> getAllResources() {
         return categoryRepository.findAll();
     }
 
-    public Category getCategory(UUID id) {
+    @Override
+    public Category getResource(UUID id) {
         Optional<Category> category = categoryRepository.findById(id);
         return category.orElseThrow(() -> new ResourceNotFoundException(id));
     }
