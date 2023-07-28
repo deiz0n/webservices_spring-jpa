@@ -23,14 +23,14 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<List<Product>> findAllProducts() {
-        List<Product> products = productService.getProducts();
+        List<Product> products = productService.getAllResourcers();
         return ResponseEntity.ok().body(products);
     }
 
 
     @GetMapping(value = ("/{id}"))
     public ResponseEntity<Product> findProductById(@PathVariable UUID id) {
-        var product = productService.getProduct(id);
+        var product = productService.getResource(id);
         return ResponseEntity.ok().body(product);
     }
 
@@ -40,20 +40,20 @@ public class ProductController {
         var product = new Product();
         BeanUtils.copyProperties(productDTO, product);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
-        return ResponseEntity.created(uri).body(productService.insertProduct(product));
+        return ResponseEntity.created(uri).body(productService.createResource(product));
     }
 
     @Transactional
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> remProduct(@PathVariable UUID id) {
-        productService.deleteProductById(id);
+        productService.removeResource(id);
         return ResponseEntity.noContent().build();
     }
 
     @Transactional
     @PutMapping(value = "/{id}")
     public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product product, ProductDTO productDTO) {
-         product = productService.updateProduct(id, product);
+         product = productService.updateResource(id, product);
          BeanUtils.copyProperties(product, productDTO);
          return ResponseEntity.ok().body(product);
     }

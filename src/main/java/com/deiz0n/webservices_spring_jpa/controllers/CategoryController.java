@@ -22,13 +22,13 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<List<Category>> findAllCategories() {
-        List<Category> categories = categoryService.getCategories();
+        List<Category> categories = categoryService.getAllResources();
         return ResponseEntity.ok().body(categories);
     }
 
     @GetMapping(value = ("/{id}"))
     public ResponseEntity<Category> findCategoryById(@PathVariable UUID id) {
-        var category = categoryService.getCategory(id);
+        var category = categoryService.getResource(id);
         return ResponseEntity.ok().body(category);
     }
 }

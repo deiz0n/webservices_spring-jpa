@@ -24,13 +24,13 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<User>> findAllUsers() {
-        List<User> users = userService.getUsers();
+        List<User> users = userService.getAllResourcers();
         return ResponseEntity.ok(users);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<User> findUserById(@PathVariable UUID id) {
-        var user = userService.getUser(id);
+        var user = userService.getResource(id);
         return ResponseEntity.ok().body(user);
     }
 
@@ -40,20 +40,20 @@ public class UserController {
         var user = new User();
         BeanUtils.copyProperties(userDTO, user);
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(userService.addUser(user));
+        return ResponseEntity.created(uri).body(userService.createResource(user));
     }
 
     @Transactional
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> remUser(@PathVariable UUID id) {
-        userService.remUser(id);
+        userService.removeResource(id);
         return ResponseEntity.noContent().build();
     }
 
     @Transactional
     @PutMapping(value = "/{id}")
     public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody @Valid User user, UserDTO userDTO) {
-        user = userService.updateUser(id, user);
+        user = userService.updateResource(id, user);
         BeanUtils.copyProperties(user, userDTO);
         return ResponseEntity.ok().body(user);
     }
