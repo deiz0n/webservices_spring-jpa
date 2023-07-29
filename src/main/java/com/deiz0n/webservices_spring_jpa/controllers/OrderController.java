@@ -14,15 +14,21 @@ import java.util.UUID;
 @RequestMapping(value = "/orders")
 public class OrderController {
 
-    @Autowired
     private OrderService orderService;
 
+    @Autowired
+    public OrderController(OrderService orderService) {
+        this.orderService = orderService;
+    }
+
+    @Transactional(readOnly = true)
     @GetMapping
     public ResponseEntity<List<Order>> findAllOrders() {
         List<Order> orders = orderService.getAllResources();
         return ResponseEntity.ok().body(orders);
     }
 
+    @Transactional(readOnly = true)
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> findOrderById(@PathVariable UUID id) {
         var order = orderService.getResource(id);

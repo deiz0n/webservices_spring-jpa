@@ -17,15 +17,21 @@ import java.util.UUID;
 @RequestMapping("/categories")
 public class CategoryController {
 
-    @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    public CategoryController(CategoryService categoryService) {
+        this.categoryService = categoryService;
+    }
+
+    @Transactional(readOnly = true)
     @GetMapping
     public ResponseEntity<List<Category>> findAllCategories() {
         List<Category> categories = categoryService.getAllResources();
         return ResponseEntity.ok().body(categories);
     }
 
+    @Transactional(readOnly = true)
     @GetMapping(value = ("/{id}"))
     public ResponseEntity<Category> findCategoryById(@PathVariable UUID id) {
         var category = categoryService.getResource(id);

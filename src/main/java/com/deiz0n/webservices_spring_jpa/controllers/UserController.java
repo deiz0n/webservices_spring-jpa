@@ -19,8 +19,13 @@ import java.util.UUID;
 @RequestMapping(value = "/users")
 public class UserController {
 
-    @Autowired
+
     private UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public ResponseEntity<List<User>> findAllUsers() {

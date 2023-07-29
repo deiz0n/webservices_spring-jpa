@@ -18,8 +18,18 @@ import java.util.UUID;
 @RequestMapping( value = "/products")
 public class ProductController {
 
-    @Autowired
+    private ServletUriComponentsBuilder servletUriComponentsBuilder;
+
     private ProductService productService;
+
+    public void setServletUriComponentsBuilder(ServletUriComponentsBuilder servletUriComponentsBuilder) {
+        this.servletUriComponentsBuilder = servletUriComponentsBuilder;
+    }
+
+    @Autowired
+    public ProductController(ProductService productService) {
+        this.productService = productService;
+    }
 
     @GetMapping
     public ResponseEntity<List<Product>> findAllProducts() {
