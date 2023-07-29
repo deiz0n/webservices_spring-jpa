@@ -2,12 +2,12 @@ package com.deiz0n.webservices_spring_jpa.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.Date;
-import java.util.Objects;
 import java.util.UUID;
 
 @Data

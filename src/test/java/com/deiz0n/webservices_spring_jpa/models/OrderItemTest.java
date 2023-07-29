@@ -1,12 +1,8 @@
 package com.deiz0n.webservices_spring_jpa.models;
 
-import com.deiz0n.webservices_spring_jpa.models.enums.OrderStatus;
 import org.junit.jupiter.api.Test;
 
-import java.time.Instant;
-import java.util.UUID;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OrderItemTest {
 

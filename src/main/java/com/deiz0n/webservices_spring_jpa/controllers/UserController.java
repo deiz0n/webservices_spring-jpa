@@ -1,7 +1,6 @@
 package com.deiz0n.webservices_spring_jpa.controllers;
 
 import com.deiz0n.webservices_spring_jpa.dtos.UserDTO;
-import com.deiz0n.webservices_spring_jpa.models.Product;
 import com.deiz0n.webservices_spring_jpa.models.User;
 import com.deiz0n.webservices_spring_jpa.services.UserService;
 import jakarta.validation.Valid;
