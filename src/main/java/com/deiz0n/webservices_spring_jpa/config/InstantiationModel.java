@@ -12,7 +12,7 @@ import java.time.Instant;
 import java.util.Arrays;
 
 @Configuration
-@Profile("dev")
+@Profile("prod")
 public class InstantiationModel implements CommandLineRunner {
 
 
