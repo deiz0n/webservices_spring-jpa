@@ -2,6 +2,7 @@ package com.deiz0n.webservices_spring_jpa.controllers;
 
 import com.deiz0n.webservices_spring_jpa.models.Category;
 import com.deiz0n.webservices_spring_jpa.services.CategoryService;
+import com.deiz0n.webservices_spring_jpa.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +33,7 @@ public class CategoryController {
     }
 
     @Transactional(readOnly = true)
-    @GetMapping(value = ("/{id}"))
+    @GetMapping("/{id}")
     public ResponseEntity<Category> findCategoryById(@PathVariable UUID id) {
         var category = categoryService.getResource(id);
         return ResponseEntity.ok().body(category);

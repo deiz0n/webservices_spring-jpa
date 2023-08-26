@@ -6,6 +6,8 @@ import com.deiz0n.webservices_spring_jpa.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -57,7 +59,7 @@ public class ProductController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> remProduct(@PathVariable UUID id) {
         productService.removeResource(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.notFound().build();
     }
 
     @Transactional
