@@ -14,7 +14,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_product")
-public class Product  implements Serializable {
+public class Product {
 
     @EqualsAndHashCode.Include
     @Id

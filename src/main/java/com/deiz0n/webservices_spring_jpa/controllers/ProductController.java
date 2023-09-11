@@ -20,13 +20,7 @@ import java.util.UUID;
 @RequestMapping( value = "/products")
 public class ProductController {
 
-    private ServletUriComponentsBuilder servletUriComponentsBuilder;
-
     private ProductService productService;
-
-    public void setServletUriComponentsBuilder(ServletUriComponentsBuilder servletUriComponentsBuilder) {
-        this.servletUriComponentsBuilder = servletUriComponentsBuilder;
-    }
 
     @Autowired
     public ProductController(ProductService productService) {

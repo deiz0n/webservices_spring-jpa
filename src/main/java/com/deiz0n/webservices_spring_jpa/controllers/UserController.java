@@ -18,7 +18,6 @@ import java.util.UUID;
 @RequestMapping(value = "/users")
 public class UserController {
 
-
     private UserService userService;
 
     @Autowired

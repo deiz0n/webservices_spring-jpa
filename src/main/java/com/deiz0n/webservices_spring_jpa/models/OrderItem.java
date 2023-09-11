@@ -16,7 +16,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order_item")
-public class OrderItem implements Serializable {
+public class OrderItem {
 
     @EqualsAndHashCode.Include
     @EmbeddedId

@@ -18,7 +18,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_order")
-public class Order implements Serializable {
+public class Order {
 
     @EqualsAndHashCode.Include
     @Id
