@@ -54,7 +54,7 @@ public class UserController {
     }
 
     @Transactional
-    @PutMapping(value = "/{id}")
+    @PatchMapping(value = "/{id}")
     public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody @Valid User user, UserDTO userDTO) {
         user = userService.updateResource(id, user);
         BeanUtils.copyProperties(user, userDTO);

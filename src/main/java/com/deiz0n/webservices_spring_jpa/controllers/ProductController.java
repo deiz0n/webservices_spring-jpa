@@ -57,7 +57,7 @@ public class ProductController {
     }
 
     @Transactional
-    @PutMapping(value = "/{id}")
+    @PatchMapping(value = "/{id}")
     public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product product, ProductDTO productDTO) {
          product = productService.updateResource(id, product);
          BeanUtils.copyProperties(product, productDTO);

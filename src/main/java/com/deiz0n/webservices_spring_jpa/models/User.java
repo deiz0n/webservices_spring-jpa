@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -24,9 +23,9 @@ public class User {
     @GeneratedValue
     private UUID id;
     private String name;
-    private String email;
+    @Column(unique = true) private String email;
     private String address;
-    private String phone;
+    @Column(unique = true) private String phone;
     private String password;
 
     @JsonIgnore
