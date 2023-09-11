@@ -56,7 +56,7 @@ public class ProductService implements ServiceCRUD<Product> {
         try{
             var oldProductData = productRepository.getReferenceById(id);
             updateDataResource(oldProductData, newResourceData);
-            return productRepository.save(newResourceData);
+            return productRepository.save(oldProductData);
         } catch (EntityNotFoundException error) {
             throw new ResourceNotFoundException(id);
         }
@@ -64,9 +64,17 @@ public class ProductService implements ServiceCRUD<Product> {
 
     @Override
     public void updateDataResource(Product oldResourceData, Product newResourceData) {
-        oldResourceData.setName(newResourceData.getName());
-        oldResourceData.setDescription(newResourceData.getDescription());
-        oldResourceData.setPrice(newResourceData.getPrice());
-        oldResourceData.setImgURL(newResourceData.getImgURL());
+        if (newResourceData.getName() != null) {
+            oldResourceData.setName(newResourceData.getName());
+        }
+        if (newResourceData.getDescription() != null) {
+            oldResourceData.setDescription(newResourceData.getDescription());
+        }
+        if (newResourceData.getPrice() != null) {
+            oldResourceData.setPrice(newResourceData.getPrice());
+        }
+        if (newResourceData.getImgURL() != null) {
+            oldResourceData.setImgURL(newResourceData.getImgURL());
+        }
     }
 }

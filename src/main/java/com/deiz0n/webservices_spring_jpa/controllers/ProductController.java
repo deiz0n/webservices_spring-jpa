@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping( value = "/products")
+@RequestMapping("/products")
 public class ProductController {
 
     private ProductService productService;
@@ -34,7 +34,7 @@ public class ProductController {
     }
 
 
-    @GetMapping(value = ("/{id}"))
+    @GetMapping("/{id}")
     public ResponseEntity<Product> findProductById(@PathVariable UUID id) {
         var product = productService.getResource(id);
         return ResponseEntity.ok().body(product);
@@ -50,14 +50,14 @@ public class ProductController {
     }
 
     @Transactional
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> remProduct(@PathVariable UUID id) {
         productService.removeResource(id);
         return ResponseEntity.notFound().build();
     }
 
     @Transactional
-    @PatchMapping(value = "/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product product, ProductDTO productDTO) {
          product = productService.updateResource(id, product);
          BeanUtils.copyProperties(product, productDTO);
