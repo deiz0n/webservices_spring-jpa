@@ -1,6 +1,5 @@
 package com.deiz0n.webservices_spring_jpa.controllers;
 
-import com.deiz0n.webservices_spring_jpa.dtos.UserDTO;
 import com.deiz0n.webservices_spring_jpa.models.User;
 import com.deiz0n.webservices_spring_jpa.services.UserService;
 import jakarta.validation.Valid;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/users")
+@RequestMapping("/users")
 public class UserController {
 
     private UserService userService;
@@ -31,7 +30,7 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable UUID id) {
         var user = userService.getResource(id);
         return ResponseEntity.ok().body(user);
@@ -39,25 +38,22 @@ public class UserController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody @Valid UserDTO userDTO) {
-        var user = new User();
-        BeanUtils.copyProperties(userDTO, user);
+    public ResponseEntity<User> addUser(@RequestBody @Valid User user) {
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(userService.createResource(user));
     }
 
     @Transactional
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> remUser(@PathVariable UUID id) {
         userService.removeResource(id);
         return ResponseEntity.noContent().build();
     }
 
     @Transactional
-    @PatchMapping(value = "/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody @Valid User user, UserDTO userDTO) {
+    @PutMapping ("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody @Valid User user) {
         user = userService.updateResource(id, user);
-        BeanUtils.copyProperties(user, userDTO);
         return ResponseEntity.ok().body(user);
     }
 

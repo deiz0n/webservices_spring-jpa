@@ -20,6 +20,8 @@ public class Product {
     @Id
     @GeneratedValue
     private UUID id;
+
+    @Column(unique = true)
     private String name;
     private String description;
     private Double price;

@@ -1,13 +1,11 @@
 package com.deiz0n.webservices_spring_jpa.controllers;
 
-import com.deiz0n.webservices_spring_jpa.dtos.ProductDTO;
+
 import com.deiz0n.webservices_spring_jpa.models.Product;
 import com.deiz0n.webservices_spring_jpa.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +40,7 @@ public class ProductController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<Product> addProduct(@RequestBody @Valid ProductDTO productDTO) {
-        var product = new Product();
-        BeanUtils.copyProperties(productDTO, product);
+    public ResponseEntity<Product> addProduct(@RequestBody @Valid Product product) {
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(product.getId()).toUri();
         return ResponseEntity.created(uri).body(productService.createResource(product));
     }
@@ -58,9 +54,8 @@ public class ProductController {
 
     @Transactional
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product product, ProductDTO productDTO) {
+    public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product product) {
          product = productService.updateResource(id, product);
-         BeanUtils.copyProperties(product, productDTO);
          return ResponseEntity.ok().body(product);
     }
 }

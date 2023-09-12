@@ -3,6 +3,7 @@ package com.deiz0n.webservices_spring_jpa.services;
 import com.deiz0n.webservices_spring_jpa.models.User;
 import com.deiz0n.webservices_spring_jpa.repositories.UserRepository;
 import com.deiz0n.webservices_spring_jpa.services.exceptions.DatabaseException;
+import com.deiz0n.webservices_spring_jpa.services.exceptions.EmailOrPhoneAlreadyRegistered;
 import com.deiz0n.webservices_spring_jpa.services.exceptions.ResourceNotFoundException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +39,11 @@ public class UserService implements ServiceCRUD<User> {
     @Override
     public User createResource(User user) {
         user.setPassword(user.getPassword());
-        return userRepository.save(user);
+        try {
+            return userRepository.save(user);
+        } catch (DataIntegrityViolationException error) {
+            throw new EmailOrPhoneAlreadyRegistered("Email or telephone number already registered.");
+        }
     }
 
     @Override
@@ -57,7 +62,7 @@ public class UserService implements ServiceCRUD<User> {
         try {
             var oldUserData = userRepository.getReferenceById(id);
             updateDataResource(oldUserData, newResourceData);
-            return userRepository.save(newResourceData);
+            return userRepository.save(oldUserData);
         } catch (EntityNotFoundException error) {
             throw new ResourceNotFoundException(id);
         }
@@ -65,10 +70,20 @@ public class UserService implements ServiceCRUD<User> {
 
     @Override
     public void updateDataResource(User oldResourceData, User newResourceData) {
-        oldResourceData.setName(newResourceData.getName());
-        oldResourceData.setEmail(newResourceData.getEmail());
-        oldResourceData.setAddress(newResourceData.getAddress());
-        oldResourceData.setPhone(newResourceData.getPhone());
-        oldResourceData.setPassword(newResourceData.getPassword());
+        if (newResourceData.getName() != null) {
+            oldResourceData.setName(newResourceData.getName());
+        }
+        if (newResourceData.getEmail() != null) {
+            oldResourceData.setEmail(newResourceData.getEmail());
+        }
+        if (newResourceData.getAddress() != null){
+            oldResourceData.setAddress((newResourceData.getAddress()));
+        }
+        if (newResourceData.getPhone() != null) {
+            oldResourceData.setPhone(newResourceData.getPhone());
+        }
+        if (newResourceData.getPassword() != null) {
+            oldResourceData.setPassword(newResourceData.getPassword());
+        }
     }
 }
