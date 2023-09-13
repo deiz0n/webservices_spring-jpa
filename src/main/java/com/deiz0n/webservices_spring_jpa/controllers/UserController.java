@@ -1,10 +1,12 @@
 package com.deiz0n.webservices_spring_jpa.controllers;
 
 import com.deiz0n.webservices_spring_jpa.models.User;
+import com.deiz0n.webservices_spring_jpa.repositories.UserRepository;
 import com.deiz0n.webservices_spring_jpa.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -17,12 +19,11 @@ import java.util.UUID;
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
     private UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+    private UserRepository userRepository;
 
     @GetMapping
     public ResponseEntity<List<User>> findAllUsers() {
@@ -38,7 +39,13 @@ public class UserController {
 
     @Transactional
     @PostMapping
-    public ResponseEntity<User> addUser(@RequestBody @Valid User user) {
+    public ResponseEntity<?> addUser(@RequestBody @Valid User user) {
+        if (userRepository.findFirstByEmail().contains(user.getEmail())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("E-mail already registered");
+        }
+        if (userRepository.findFirstByPhone().contains(user.getPhone())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Phone already registered");
+        }
         var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(userService.createResource(user));
     }

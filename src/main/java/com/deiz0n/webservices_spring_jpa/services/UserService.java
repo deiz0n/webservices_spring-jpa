@@ -39,11 +39,7 @@ public class UserService implements ServiceCRUD<User> {
     @Override
     public User createResource(User user) {
         user.setPassword(user.getPassword());
-        try {
-            return userRepository.save(user);
-        } catch (DataIntegrityViolationException error) {
-            throw new EmailOrPhoneAlreadyRegistered("Email or telephone number already registered.");
-        }
+        return userRepository.save(user);
     }
 
     @Override
