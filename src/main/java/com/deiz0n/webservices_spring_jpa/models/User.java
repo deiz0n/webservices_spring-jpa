@@ -34,7 +34,7 @@ public class User {
 
     @JsonIgnore
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Order> orders = new ArrayList<>();
 
     public User(String name, String email, String address, String phone, String password) {

@@ -21,14 +21,19 @@ public class ExceptionHandlerApplication extends ResponseEntityExceptionHandler 
     @ExceptionHandler(ResourceNotFoundException.class)
     public ResponseEntity<?> notFoundHandler() {
         var error = new DefaultError(HttpStatus.NOT_FOUND.value(), "Resource not found");
-        return new ResponseEntity(error, HttpStatus.NOT_FOUND);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
     @ExceptionHandler(DatabaseException.class)
     public ResponseEntity<?> databaseException() {
         var error = new DefaultError(HttpStatus.CONFLICT.value(), "Resource in use");
-        return new ResponseEntity(error, HttpStatus.CONFLICT);
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<?> dataIntegrityException() {
+        var error = new DefaultError(HttpStatus.CONFLICT.value(), "Resource in use");
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
+    }
 
 }

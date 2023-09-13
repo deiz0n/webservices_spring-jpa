@@ -2,6 +2,7 @@ package com.deiz0n.webservices_spring_jpa.models.pk;
 
 import com.deiz0n.webservices_spring_jpa.models.Order;
 import com.deiz0n.webservices_spring_jpa.models.Product;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
