@@ -54,8 +54,7 @@ public class UserController {
     @Operation(summary = "Cadastra um novo usuário", method = "POST")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Usuário cadastrado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "E-mail já cadastrado"),
-            @ApiResponse(responseCode = "400", description = "Telefone já cadastrado")
+            @ApiResponse(responseCode = "400", description = "E-mail ou telefone já cadastrado")
     })
     @Transactional
     @PostMapping
@@ -85,8 +84,7 @@ public class UserController {
     @Operation(summary = "Atualiza os dados de determinado usuário", method = "PUT")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Usuário atualizado com sucesso"),
-            @ApiResponse(responseCode = "400", description = "E-mail já cadastrado"),
-            @ApiResponse(responseCode = "400", description = "Telefone já cadastrado")
+            @ApiResponse(responseCode = "400", description = "E-mail ou telefone já cadastrado"),
     })
     @Transactional
     @PutMapping ("/{id}")
