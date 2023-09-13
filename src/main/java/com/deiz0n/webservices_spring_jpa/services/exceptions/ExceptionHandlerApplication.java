@@ -30,10 +30,4 @@ public class ExceptionHandlerApplication extends ResponseEntityExceptionHandler 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<?> dataIntegrityException() {
-        var error = new DefaultError(HttpStatus.CONFLICT.value(), "Resource in use");
-        return ResponseEntity.status(HttpStatus.CONFLICT).body(error);
-    }
-
 }

@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//OpenAPIDefinition(info = @Info(title = "WebServices Spring JPA", version = "1", description = "API desenvolvida para realizar o gerenciamento de pedidos"))
+@OpenAPIDefinition(info = @Info(title = "Gerenciamento de Pedidos - API", version = "1.0", description = "API para realizar o gerenciamento de pedidos"))
 public class WebservicesSpringJpaApplication {
 
     public static void main(String[] args) {
