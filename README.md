@@ -25,10 +25,10 @@ git clone https://github.com/seu-usuario/seu-repositorio.git
 ```
 
 ## Configuração do Banco de Dados
-Certifique-se de que o PostgreSQL esteja instalado e configurado corretamente. Edite o arquivo 
+Certifique-se de que o PostgreSQL esteja instalado e configurado corretamente. Edite o arquivo <br>
 ```src/main/resources/application.properties``` para configurar as informações de conexão com o banco de dados:
-```spring.datasource.url=jdbc:postgresql://localhost:5432/seu-banco-de-dados``` 
-```spring.datasource.username=seu-usuario```
+```spring.datasource.url=jdbc:postgresql://localhost:5432/seu-banco-de-dados``` <br>
+```spring.datasource.username=seu-usuario``` <br>
 ```spring.datasource.password=sua-senha```
 
 ## Compilar e Executar o Projeto
