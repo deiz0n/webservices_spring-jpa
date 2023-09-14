@@ -8,8 +8,15 @@ são realizadas por meio do formato JSON, garantindo uma integração fácil e f
 
 ## `⚙️` -  Bibliotecas
 Nesse tópico, gostaria de destacar algumas bibliotecas usei durante o desenvolvimento `😃`
-
-
+  - **Spring Boot**: Gerenciamento, injeção de dependências e outras configurações;
+  - **Spring Boot Web**: Criação da api restful usando a arquitetura rest;
+  - **Spring Boot JPA**: Mapeamento Objeto-Relacional (ORM);
+  - **Spring Security Crypto**: Criptografia de dados sensíveis;
+  - **Lombok**: Annotations que ajudam a torna o código mais limpo;
+  - **H2**: Banco de dados temporário para testes;
+  - **PostgreSQL**: Banco de dados utilizado em produção;
+  - **JUnit**: Testes unitários.
+  
 ## `🖥️` - Pré-requisitos
 Certifique-se de ter os seguintes requisitos instalados:
 - Java 17
